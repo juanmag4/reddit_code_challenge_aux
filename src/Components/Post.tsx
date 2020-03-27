@@ -20,15 +20,15 @@ const Post = (props: any) => {
   }
   
   return (
-    <div className='ui card'>
+    <div className='ui card' style={{ width: 'auto', maxWidth: '550px' }}>
       <div className='content'>
-        <div className='right floated meta'>{getTimeAgo()}</div>
+        <div className='right floated meta' title={moment.utc(created_utc * 1000).toLocaleString()}>{getTimeAgo()}</div>
         {author}
       </div>
       <div className='content'>
         {title}
       </div>
-      {thumbnail ? <div onClick={openImage} className='image'>
+      {thumbnail != 'default' ? <div onClick={openImage} className='image'>
         <img src={thumbnail} />
       </div> : <div></div>}
       <div className='content'>

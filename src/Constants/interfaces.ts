@@ -15,5 +15,9 @@ export interface Post {
 
 export interface PostsStore {
   posts: Post[],
-  addPosts: Function
+  after: string,
+  before: string,
+  count: number,
+  addPosts: Function,
+  setPagination: Function
 }

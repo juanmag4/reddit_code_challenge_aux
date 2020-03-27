@@ -2,33 +2,60 @@ import React, { useEffect, useContext } from 'react';
 import { useObserver } from 'mobx-react';
 import Post from './Post';
 import { fetchData } from '../Services/fetchData';
-import { postsEndpoint } from '../Constants/constants';
+import { postsEndpoint, LIMIT } from '../Constants/constants';
 import { StoreContext } from '../Store/store';
 
 const PostList = () => {
   const store: any = useContext(StoreContext);
 
   const getPosts = (data: any) => {
-    const { children } = data.data;
+    const { children, after, before } = data.data;
     store.addPosts(children);
+    store.setPagination(after, before);
   }
 
   const fetchPosts = () => {
-    fetchData(postsEndpoint, getPosts);
+    fetchData(`${postsEndpoint}`, getPosts);
   };
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
+  const clickNextPage = () => {
+    fetchData(`${postsEndpoint}count=${store.count}&after=${store.after}`, getPosts);
+    store.setCount(LIMIT);
+  }
+
+  const clickPreviousPage = () => {
+    fetchData(`${postsEndpoint}count=${store.count}&before=${store.before}`, getPosts);
+    store.setCount(-LIMIT);
+  }
+
   const renderPosts = () => {
     return store.posts.map((post: any) => (<Post key={post.data.id} post={post} />));
+  }
+
+  const renderButtons = () => {
+    if (store.before) {
+      return (
+        <React.Fragment>
+          <button className="ui button" onClick={clickPreviousPage}>Previous Page</button>
+          <button className="ui button" onClick={clickNextPage}>Next Page</button>
+        </React.Fragment>
+      );
+    } else {
+      return <button className="ui button" onClick={clickNextPage}>Next Page</button>;
+    }
   }
 
   return useObserver(() => (
     <div>
       {renderPosts()}
-    </div>
+      <div>
+        {renderButtons()}
+      </div>
+    </div >
   ));
 };
 

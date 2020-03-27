@@ -7,7 +7,7 @@ import StoreProvider from './Store/store';
 
 const App = () => {
   return (
-    <div className="appContainer" bp="container">
+    <div bp="container padding-top--lg">
       <StoreProvider>
         <PostList />
       </StoreProvider>
