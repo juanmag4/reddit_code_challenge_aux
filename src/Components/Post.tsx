@@ -1,18 +1,6 @@
 import React from 'react';
 import moment, { Moment } from 'moment';
-
-const calculateTime = (minutes: number) => {
-  let timeAgo: string = '';
-  if (minutes < 60) {
-    timeAgo = `${Math.trunc(minutes)} Minutes`;
-  } else if (minutes > 60 && minutes < 1440) {
-    timeAgo = `${Math.trunc(minutes / 60)} Hours`;
-  } else {
-    timeAgo = `${Math.trunc(minutes / 60 / 24)} Days`;
-  }
-
-  return `${timeAgo} ago`;
-};
+import { calculateTime } from '../Helpers/postHelper';
 
 const Post = (props: any) => {
   const { title, author, url, thumbnail, num_comments, created_utc } = props.post.data;
