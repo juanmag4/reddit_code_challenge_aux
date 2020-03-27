@@ -4,6 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+declare module 'react' {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    // extends React's HTMLAttributes
+    bp?: string;
+  }
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
