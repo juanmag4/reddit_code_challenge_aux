@@ -11,7 +11,9 @@ export interface Post {
     url: string,
     thumbnail: string,
     num_comments: number,
-    created_utc: number
+    created_utc: number,
+    id: string,
+    visited: boolean
   }
 }
 

@@ -28,6 +28,7 @@ const Dashboard = () => {
 
   const onItemClick = (id: number) => {
     const item = store.posts.find((post: any) => (post.data.id === id));
+    store.setVisited(item);
     setSelectedPost(item);
   };
 

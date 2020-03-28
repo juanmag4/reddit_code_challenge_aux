@@ -26,6 +26,9 @@ const StoreProvider = (props: ProviderProp) => {
     addDismissedPost: (id: string) => {
       store.dismissedPosts.push(id);
       store.posts = store.posts.filter((post: any) => !store.dismissedPosts.find(id => id === post.data.id));
+    },
+    setVisited: (post: Post) => {
+      post.data.visited = true;
     }
   }));
 

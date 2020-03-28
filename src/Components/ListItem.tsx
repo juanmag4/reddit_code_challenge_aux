@@ -1,11 +1,15 @@
 import React from 'react';
 
 const ListItem = (props: any) => {
-  const { title, author, id } = props.post;
+  const { title, author, id, visited } = props.post;
   const { handleClick, handleDismiss } = props;
 
   return (
-    <div className="item" style={{ cursor: 'default' }} onClick={() => { handleClick(id) }}>
+    <div
+      className="item"
+      style={{ cursor: 'default', backgroundColor: visited ? 'lightgray' : 'white' }}
+      onClick={() => { handleClick(id) }
+    }>
       <div className="content">
         <div style={styles.header}>
           <div className="header">{author}</div>
