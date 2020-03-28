@@ -9,6 +9,7 @@ const StoreProvider = (props: ProviderProp) => {
   const { children } = props;
   const store: PostsStore = useLocalStore(() => ({
     posts: [],
+    dismissedPosts: [],
     after: '',
     before: '',
     count: LIMIT,
@@ -21,6 +22,10 @@ const StoreProvider = (props: ProviderProp) => {
     },
     setCount: (count: number) => {
       store.count+= count;
+    },
+    addDismissedPost: (id: string) => {
+      store.dismissedPosts.push(id);
+      store.posts = store.posts.filter((post: any) => !store.dismissedPosts.find(id => id === post.data.id));
     }
   }));
 

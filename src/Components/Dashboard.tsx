@@ -31,10 +31,26 @@ const Dashboard = () => {
     setSelectedPost(item);
   };
 
+  const onDismissClick = (event: Event, id: string) => {
+    const selectedPostId = selectedPost.data.id;
+    event.stopPropagation();
+    store.addDismissedPost(id);
+    if (id === selectedPostId) {
+      setSelectedPost(store.posts[0])
+    }
+  }
+
   const renderList = () => {
     return (
       <List>
-        {store.posts.map((post: any) => <ListItem key={post.data.id} post={post.data} handleClick={onItemClick} />)}
+        {store.posts.map((post: any) => 
+          <ListItem
+            key={post.data.id}
+            post={post.data}
+            handleClick={onItemClick}
+            handleDismiss={onDismissClick}
+          />
+        )}
       </List>
     );
   };

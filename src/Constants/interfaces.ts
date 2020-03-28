@@ -5,19 +5,23 @@ export type ProviderProp = {
 }
 
 export interface Post {
-  title: string,
-  author: string,
-  url: string,
-  thumbnail: string,
-  num_comments: number,
-  created_utc: number
+  data: {
+    title: string,
+    author: string,
+    url: string,
+    thumbnail: string,
+    num_comments: number,
+    created_utc: number
+  }
 }
 
 export interface PostsStore {
   posts: Post[],
+  dismissedPosts: string[],
   after: string,
   before: string,
   count: number,
   addPosts: Function,
-  setPagination: Function
+  setPagination: Function,
+  addDismissedPost: Function
 }
