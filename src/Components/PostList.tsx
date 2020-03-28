@@ -8,6 +8,10 @@ import { StoreContext } from '../Store/store';
 const PostList = () => {
   const store: any = useContext(StoreContext);
 
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   const getPosts = (data: any) => {
     const { children, after, before } = data.data;
     store.addPosts(children);
@@ -17,10 +21,6 @@ const PostList = () => {
   const fetchPosts = () => {
     fetchData(`${postsEndpoint}`, getPosts);
   };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   const clickNextPage = () => {
     fetchData(`${postsEndpoint}count=${store.count}&after=${store.after}`, getPosts);
