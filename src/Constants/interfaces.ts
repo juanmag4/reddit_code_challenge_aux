@@ -27,3 +27,10 @@ export interface PostsStore {
   setPagination: Function,
   addDismissedPost: Function
 }
+
+export interface ButtonProps {
+  title: string,
+  direction: string,
+  style?: object,
+  handleClick: Function
+}
