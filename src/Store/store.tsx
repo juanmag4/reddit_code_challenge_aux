@@ -5,8 +5,7 @@ import { LIMIT } from '../Constants/constants';
 
 export const StoreContext = createContext({});
 
-const StoreProvider = (props: ProviderProp) => {
-  const { children } = props;
+const StoreProvider = ({ children }: ProviderProp) => {
   const store: PostsStore = useLocalStore(() => ({
     posts: [],
     dismissedPosts: [],
@@ -23,9 +22,9 @@ const StoreProvider = (props: ProviderProp) => {
     setCount: (count: number) => {
       store.count+= count;
     },
-    addDismissedPost: (id: string) => {
+    dismissPost: (id: string) => {
       store.dismissedPosts.push(id);
-      store.posts = store.posts.filter((post: any) => !store.dismissedPosts.find(id => id === post.data.id));
+      store.posts = store.posts.filter((post: Post) => !(id === post.data.id));
     },
     setVisited: (post: Post) => {
       post.data.visited = true;

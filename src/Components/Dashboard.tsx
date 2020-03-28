@@ -36,7 +36,7 @@ const Dashboard = () => {
   const onDismissClick = (event: Event, id: string) => {
     const selectedPostId = selectedPost.data.id;
     event.stopPropagation();
-    store.addDismissedPost(id);
+    store.dismissPost(id);
 
     if (id === selectedPostId) {
       setSelectedPost(store.posts[0])

@@ -25,7 +25,7 @@ export interface PostsStore {
   count: number,
   addPosts: Function,
   setPagination: Function,
-  addDismissedPost: Function
+  dismissPost: Function
 }
 
 export interface ButtonProps {
