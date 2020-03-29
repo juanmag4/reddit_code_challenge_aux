@@ -11,7 +11,11 @@ const Post = (props: PostComponentProps) => {
       window.open(url);
     }
   }
-  
+
+  const hasThumbnail = () => {
+    return thumbnail != 'default' ? true : false;
+  }
+
   return (
     <div className='ui card' style={{ width: 'auto', maxWidth: '550px' }}>
       <div className='content'>
@@ -21,13 +25,15 @@ const Post = (props: PostComponentProps) => {
       <div className='content'>
         {title}
       </div>
-      {thumbnail != 'default' ? <div onClick={openImage} className='image'>
-        <img src={thumbnail} />
-      </div> : <div></div>}
+      {hasThumbnail() &&
+        <div onClick={openImage} className='image'>
+          <img src={thumbnail} />
+        </div>
+      }
       <div className='content'>
         <i className='comment icon'></i>
         {num_comments} comments
-        <button className="right floated ui button" onClick={() => { handleAddToGallery(url) }}>Add to Gallery</button>
+        {hasThumbnail() && <button className="right floated ui button" onClick={() => { handleAddToGallery(url) }}>Add to Gallery</button>}
       </div>
     </div>
   );

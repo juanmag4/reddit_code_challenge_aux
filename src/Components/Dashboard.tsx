@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useObserver } from 'mobx-react';
+import { toast } from 'react-toastify';
 import { StoreContext } from '../Store/store';
-import { fetchData, postImage } from '../Services/fetchData';
+import { fetchData, saveImage } from '../Services/service';
 import { LIMIT } from '../Constants/constants';
 import { Post as PostInterface } from '../Constants/interfaces';
 import { ArrowButton } from './ArrowButton';
@@ -24,8 +25,12 @@ const Dashboard = () => {
     setSelectedPost(posts[0]);
   }
 
+  const handleError = (error: Error) => {
+    toast.error(error.message)
+  }
+
   const fetchPosts = () => {
-    fetchData(`${process.env.REACT_APP_API_URL}&count=0`, getPosts);
+    fetchData(`${process.env.REACT_APP_API_URL}&count=0`, getPosts, handleError);
   };
 
   const onItemClick = (post: PostInterface) => {
@@ -44,11 +49,15 @@ const Dashboard = () => {
   }
 
   const onAddToGallery = (imageUrl: string) => {
-    postImage(process.env.REACT_APP_API_URL_IMAGES, imageUrl, handleSaveImage)
+    saveImage(process.env.REACT_APP_API_URL_IMAGES, imageUrl, handleSaveImage)
   }
 
-  const handleSaveImage = (data: string) => {
-    console.log(data)
+  const handleSaveImage = (data: any) => {
+    if (data.code === 200) {
+      toast.success(data.message);
+    } else {
+      toast.error(data.message);
+    }
   }
 
   const renderList = () => {

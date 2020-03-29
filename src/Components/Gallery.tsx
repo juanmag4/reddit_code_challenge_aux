@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useObserver } from 'mobx-react';
 import { StoreContext } from '../Store/store';
-import { fetchData } from '../Services/fetchData';
+import { fetchData } from '../Services/service';
 import Image from './Image';
 
 const Gallery = () => {
