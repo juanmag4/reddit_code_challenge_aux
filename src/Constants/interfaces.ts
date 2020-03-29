@@ -15,15 +15,22 @@ export interface Post {
   visited: boolean
 }
 
+export interface PostComponentProps {
+  post: Post,
+  handleAddToGallery?: Function
+}
+
 export interface PostsStore {
   posts: Post[],
   dismissedPosts: string[],
   after: string,
   before: string,
   count: number,
+  savedImages: string[],
   addPosts: Function,
   setPagination: Function,
-  dismissPost: Function
+  dismissPost: Function,
+  setImages: Function
 }
 
 export interface ButtonProps {
@@ -31,4 +38,9 @@ export interface ButtonProps {
   direction: string,
   style?: object,
   handleClick: Function
+}
+
+export interface ImageProps {
+  imageUrl: string,
+  handleImageClick?: Function
 }

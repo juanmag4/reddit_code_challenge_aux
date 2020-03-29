@@ -33,7 +33,7 @@ const PostList = () => {
   }
 
   const renderPosts = () => {
-    return store.posts.map((post: any) => (<Post key={post.data.id} post={post} />));
+    return store.posts.map((post: any) => (<Post key={post.id} post={post} />));
   }
 
   const renderButtons = () => {

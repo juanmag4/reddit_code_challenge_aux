@@ -1,8 +1,10 @@
 import React from 'react';
 import { getTimeAgo, getDate } from '../Utils/timeUtil';
+import { PostComponentProps } from '../Constants/interfaces';
 
-const Post = (props: any) => {
+const Post = (props: PostComponentProps) => {
   const { title, author, url, thumbnail, num_comments, created_utc } = props.post;
+  const { handleAddToGallery } = props;
 
   const openImage = () => {
     if (url) {
@@ -25,6 +27,7 @@ const Post = (props: any) => {
       <div className='content'>
         <i className='comment icon'></i>
         {num_comments} comments
+        <button className="right floated ui button" onClick={() => { handleAddToGallery(url) }}>Add to Gallery</button>
       </div>
     </div>
   );

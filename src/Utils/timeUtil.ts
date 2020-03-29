@@ -1,6 +1,6 @@
 import moment, { Moment } from 'moment';
 
-const calculateTime = (minutes: number) => {
+const calculateTime = (minutes: number): string => {
   let timeAgo: string = '';
   if (minutes < 60) {
     timeAgo = `${Math.trunc(minutes)} Minutes`;
@@ -13,7 +13,7 @@ const calculateTime = (minutes: number) => {
   return `${timeAgo} ago`;
 };
 
-export const getTimeAgo = (utcValue: number) => {
+export const getTimeAgo = (utcValue: number): string => {
   const postDate: Moment = moment.utc(utcValue * 1000);
   const currentDate: Moment = moment();
   const timeAgo: number = currentDate.diff(postDate, 'minute');
@@ -21,6 +21,6 @@ export const getTimeAgo = (utcValue: number) => {
   return calculateTime(timeAgo);
 };
 
-export const getDate = (utcValue: number) => {
+export const getDate = (utcValue: number): string => {
   return moment.utc(utcValue * 1000).toLocaleString();
 };

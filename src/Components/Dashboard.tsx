@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useObserver } from 'mobx-react';
 import { StoreContext } from '../Store/store';
-import { fetchData } from '../Services/fetchData';
+import { fetchData, postImage } from '../Services/fetchData';
 import { LIMIT } from '../Constants/constants';
 import { Post as PostInterface } from '../Constants/interfaces';
 import { ArrowButton } from './ArrowButton';
@@ -43,6 +43,14 @@ const Dashboard = () => {
     }
   }
 
+  const onAddToGallery = (imageUrl: string) => {
+    postImage(process.env.REACT_APP_API_URL_IMAGES, imageUrl, handleSaveImage)
+  }
+
+  const handleSaveImage = (data: string) => {
+    console.log(data)
+  }
+
   const renderList = () => {
     return (
       <List>
@@ -60,7 +68,7 @@ const Dashboard = () => {
 
   const renderPost = () => {
     if (selectedPost) {
-      return <Post post={selectedPost} />
+      return <Post post={selectedPost} handleAddToGallery={onAddToGallery} />
     } else {
       return <div>Loading!!</div>;
     }

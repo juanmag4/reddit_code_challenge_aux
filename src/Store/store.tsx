@@ -12,6 +12,7 @@ const StoreProvider = ({ children }: ProviderProp) => {
     after: '',
     before: '',
     count: LIMIT,
+    savedImages: [],
     addPosts: (posts: Post[]) => {
       store.posts = posts
     },
@@ -28,6 +29,9 @@ const StoreProvider = ({ children }: ProviderProp) => {
     },
     setVisited: (post: Post) => {
       post.visited = true;
+    },
+    setImages: (images: string[]) => {
+      store.savedImages = images;
     }
   }));
 
