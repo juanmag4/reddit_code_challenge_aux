@@ -1,4 +1,5 @@
 import React from 'react';
+import { backgroundColors } from '../Constants/constants';
 
 const ListItem = (props: any) => {
   const { title, author, id, visited } = props.post;
@@ -7,8 +8,8 @@ const ListItem = (props: any) => {
   return (
     <div
       className="item"
-      style={{ cursor: 'default', backgroundColor: visited ? 'lightgray' : 'white' }}
-      onClick={() => { handleClick(id) }
+      style={{ cursor: 'default', backgroundColor: visited ? backgroundColors.visited : backgroundColors.notVisited }}
+      onClick={() => { handleClick(props.post) }
     }>
       <div className="content">
         <div style={styles.header}>

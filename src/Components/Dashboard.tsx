@@ -3,6 +3,7 @@ import { useObserver } from 'mobx-react';
 import { StoreContext } from '../Store/store';
 import { fetchData } from '../Services/fetchData';
 import { LIMIT } from '../Constants/constants';
+import { Post as PostInterface } from '../Constants/interfaces';
 import { ArrowButton } from './ArrowButton';
 import ListItem from './ListItem';
 import Post from './Post';
@@ -27,10 +28,9 @@ const Dashboard = () => {
     fetchData(`${process.env.REACT_APP_API_URL}&count=0`, getPosts);
   };
 
-  const onItemClick = (id: number) => {
-    const item = store.posts.find((post: any) => (post.id === id));
-    store.setVisited(item);
-    setSelectedPost(item);
+  const onItemClick = (post: PostInterface) => {
+    store.setVisited(post);
+    setSelectedPost(post);
   };
 
   const onDismissClick = (event: Event, id: string) => {
