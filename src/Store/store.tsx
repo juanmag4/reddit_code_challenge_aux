@@ -24,10 +24,10 @@ const StoreProvider = ({ children }: ProviderProp) => {
     },
     dismissPost: (id: string) => {
       store.dismissedPosts.push(id);
-      store.posts = store.posts.filter((post: Post) => !(id === post.data.id));
+      store.posts = store.posts.filter((post: Post) => !(id === post.id));
     },
     setVisited: (post: Post) => {
-      post.data.visited = true;
+      post.visited = true;
     }
   }));
 

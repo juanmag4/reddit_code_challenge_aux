@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useObserver } from 'mobx-react';
 import { StoreContext } from '../Store/store';
 import { fetchData } from '../Services/fetchData';
-import { postsEndpoint , LIMIT} from '../Constants/constants';
+import { LIMIT } from '../Constants/constants';
 import { ArrowButton } from './ArrowButton';
 import ListItem from './ListItem';
 import Post from './Post';
@@ -17,24 +17,24 @@ const Dashboard = () => {
   }, []);
 
   const getPosts = (data: any) => {
-    const { children, after, before } = data.data;
-    store.addPosts(children);
+    const { posts, after, before } = data;
+    store.addPosts(posts);
     store.setPagination(after, before);
-    setSelectedPost(children[0]);
+    setSelectedPost(posts[0]);
   }
 
   const fetchPosts = () => {
-    fetchData(`${postsEndpoint}`, getPosts);
+    fetchData(`${process.env.REACT_APP_API_URL}&count=0`, getPosts);
   };
 
   const onItemClick = (id: number) => {
-    const item = store.posts.find((post: any) => (post.data.id === id));
+    const item = store.posts.find((post: any) => (post.id === id));
     store.setVisited(item);
     setSelectedPost(item);
   };
 
   const onDismissClick = (event: Event, id: string) => {
-    const selectedPostId = selectedPost.data.id;
+    const selectedPostId = selectedPost.id;
     event.stopPropagation();
     store.dismissPost(id);
 
@@ -48,8 +48,8 @@ const Dashboard = () => {
       <List>
         {store.posts.map((post: any) =>
           <ListItem
-            key={post.data.id}
-            post={post.data}
+            key={post.id}
+            post={post}
             handleClick={onItemClick}
             handleDismiss={onDismissClick}
           />
@@ -67,26 +67,24 @@ const Dashboard = () => {
   };
 
   const clickNextPage = () => {
-    fetchData(`${postsEndpoint}count=${store.count}&after=${store.after}`, getPosts);
+    fetchData(`${process.env.REACT_APP_API_URL}count=${store.count}&after=${store.after}`, getPosts);
     store.setCount(LIMIT);
   }
 
   const clickPreviousPage = () => {
-    fetchData(`${postsEndpoint}count=${store.count}&before=${store.before}`, getPosts);
+    fetchData(`${process.env.REACT_APP_API_URL}count=${store.count}&before=${store.before}`, getPosts);
     store.setCount(-LIMIT);
   }
 
   const renderButtons = () => {
-    if (store.before) {
-      return (
-        <React.Fragment>
+    return (
+      <React.Fragment>
+        {store.before &&
           <ArrowButton title="Previous" direction="left" handleClick={clickPreviousPage} />
-          <ArrowButton title="Next" direction="right" handleClick={clickNextPage} style={{ width: '130px' }} />
-        </React.Fragment>
-      );
-    } else {
-      return <ArrowButton title="Next" direction="right" handleClick={clickNextPage} style={{ width: '130px' }} />;
-    }
+        }
+        <ArrowButton title="Next" direction="right" handleClick={clickNextPage} style={{ width: '130px' }} />
+      </React.Fragment>
+    )
   }
 
   return useObserver(() => (

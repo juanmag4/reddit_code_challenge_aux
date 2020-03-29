@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useObserver } from 'mobx-react';
 import Post from './Post';
 import { fetchData } from '../Services/fetchData';
-import { postsEndpoint, LIMIT } from '../Constants/constants';
+import { LIMIT } from '../Constants/constants';
 import { StoreContext } from '../Store/store';
 
 const PostList = () => {
@@ -19,16 +19,16 @@ const PostList = () => {
   }
 
   const fetchPosts = () => {
-    fetchData(`${postsEndpoint}`, getPosts);
+    fetchData(`${process.env.REACT_APP_API_URL}`, getPosts);
   };
 
   const clickNextPage = () => {
-    fetchData(`${postsEndpoint}count=${store.count}&after=${store.after}`, getPosts);
+    fetchData(`${process.env.REACT_APP_API_URL}count=${store.count}&after=${store.after}`, getPosts);
     store.setCount(LIMIT);
   }
 
   const clickPreviousPage = () => {
-    fetchData(`${postsEndpoint}count=${store.count}&before=${store.before}`, getPosts);
+    fetchData(`${process.env.REACT_APP_API_URL}count=${store.count}&before=${store.before}`, getPosts);
     store.setCount(-LIMIT);
   }
 

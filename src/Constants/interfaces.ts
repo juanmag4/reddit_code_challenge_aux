@@ -5,16 +5,14 @@ export type ProviderProp = {
 }
 
 export interface Post {
-  data: {
-    title: string,
-    author: string,
-    url: string,
-    thumbnail: string,
-    num_comments: number,
-    created_utc: number,
-    id: string,
-    visited: boolean
-  }
+  title: string,
+  author: string,
+  url: string,
+  thumbnail: string,
+  num_comments: number,
+  created_utc: number,
+  id: string,
+  visited: boolean
 }
 
 export interface PostsStore {
