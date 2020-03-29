@@ -49,7 +49,7 @@ const Dashboard = () => {
   }
 
   const onAddToGallery = (imageUrl: string) => {
-    saveImage(process.env.REACT_APP_API_URL_IMAGES, imageUrl, handleSaveImage)
+    saveImage(process.env.REACT_APP_API_URL_IMAGES, imageUrl, handleSaveImage, handleError)
   }
 
   const handleSaveImage = (data: any) => {

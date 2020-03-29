@@ -9,10 +9,12 @@ export const fetchData = async (url: string, callback: Function, errorCallback?:
   }
 };
 
-export const saveImage = async (url: string, imageUrl: string, cb: Function) => {
-  const body = {
-    url: imageUrl
-  };
-  const result = await axios.post(url, body);
-  cb(result.data);
+export const saveImage = async (url: string, imageUrl: string, cb: Function, errorCB?: Function) => {
+  const body = { url: imageUrl };
+  try {
+    const result = await axios.post(url, body);
+    cb(result.data);
+  } catch (error) {
+    errorCB(error)
+  }
 };
