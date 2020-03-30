@@ -29,7 +29,7 @@ const Dashboard = () => {
     fetchData(`${process.env.REACT_APP_API_URL}&count=0`, getPosts, handleError);
   };
 
-  return useObserver(() => (
+  return (
     <div>
       <div bp="padding-bottom--lg">
         <PaginationButtons />
@@ -43,7 +43,7 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-  ));
+  );
 };
 
 export default Dashboard;

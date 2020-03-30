@@ -18,8 +18,9 @@ const StoreProvider = ({ children }: ProviderProp) => {
       store.posts = posts
     },
     selectPost: (selectedPost: Post) => {
-      selectedPost.visited = true;
+      store.posts.find((post: Post) => post.id === selectedPost.id).visited = true;
       store.selectedPost = selectedPost;
+      store.posts = [...store.posts];
     },
     setPagination: (after: string, before: string) => {
       store.after = after;
