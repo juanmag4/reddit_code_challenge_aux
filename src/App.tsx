@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import StoreProvider from './Store/store';
 import Header from './Components/Header';
-import Dashboard from './Components/Dashboard';
+import Dashboard from './Components/Dashboard/Dashboard';
 import Gallery from './Components/Gallery';
 
 const App = () => {

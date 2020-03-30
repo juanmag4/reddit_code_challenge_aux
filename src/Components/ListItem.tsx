@@ -30,4 +30,4 @@ const styles = {
     justifyContent: 'space-between',
     color: '#2185d0'
   }
-}
+};

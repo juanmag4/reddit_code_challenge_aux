@@ -8,6 +8,7 @@ export const StoreContext = createContext({});
 const StoreProvider = ({ children }: ProviderProp) => {
   const store: PostsStore = useLocalStore(() => ({
     posts: [],
+    selectedPost: null,
     dismissedPosts: [],
     after: '',
     before: '',
@@ -15,6 +16,10 @@ const StoreProvider = ({ children }: ProviderProp) => {
     savedImages: [],
     addPosts: (posts: Post[]) => {
       store.posts = posts
+    },
+    selectPost: (selectedPost: Post) => {
+      selectedPost.visited = true;
+      store.selectedPost = selectedPost;
     },
     setPagination: (after: string, before: string) => {
       store.after = after;
@@ -26,9 +31,6 @@ const StoreProvider = ({ children }: ProviderProp) => {
     dismissPost: (id: string) => {
       store.dismissedPosts.push(id);
       store.posts = store.posts.filter((post: Post) => !(id === post.id));
-    },
-    setVisited: (post: Post) => {
-      post.visited = true;
     },
     setImages: (images: string[]) => {
       store.savedImages = images;

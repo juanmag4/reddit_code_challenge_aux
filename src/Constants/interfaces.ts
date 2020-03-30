@@ -22,11 +22,13 @@ export interface PostComponentProps {
 
 export interface PostsStore {
   posts: Post[],
+  selectedPost: Post,
   dismissedPosts: string[],
   after: string,
   before: string,
   count: number,
   savedImages: string[],
+  selectPost: Function,
   addPosts: Function,
   setPagination: Function,
   dismissPost: Function,
